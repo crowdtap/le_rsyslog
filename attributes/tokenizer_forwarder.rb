@@ -9,9 +9,9 @@ default['le_rsyslog']['tokenizer']['input_template'] = 'RSYSLOG_TraditionalFileF
 default['le_rsyslog']['tokenizer_rb']['interpreter'] = RbConfig.ruby #use Chef's ruby in case there aren't any others
 default['le_rsyslog']['tokenizer_rb']['account_key'] = ''
 default['le_rsyslog']['tokenizer_rb']['log_level'] = 'INFO'
-default['le_rsyslog']['tokenizer_rb']['match_regex'] = '/^.*? (?<host>[a-z][a-z0-9-]+) (?<log>[\w\.]+?) (?<line>.*$)/'
-default['le_rsyslog']['tokenizer_rb']['validate_expression'] = 'host.nil? || log.nil? || host.empty? || log.empty?'
-default['le_rsyslog']['tokenizer_rb']['emit_string'] = '"#{token} #{line}\n"'
+default['le_rsyslog']['tokenizer_rb']['match_regex'] = '/^.*? (?<host>[a-z][a-z0-9-]+)-(?<id>[0-9a-f]+) (?<log>[\w\.]+) (?<line>.*$)/'
+default['le_rsyslog']['tokenizer_rb']['validate_expression'] = 'host.nil? || id.nil? || log.nil? || host.empty? || id.empty? || log.empty?'
+default['le_rsyslog']['tokenizer_rb']['emit_string'] = '"#{token} #{id}: #{line}\n"'
 
 default['le_rsyslog']['forwarder']['host'] = '127.0.0.1'
 default['le_rsyslog']['forwarder']['port'] = '10001'
