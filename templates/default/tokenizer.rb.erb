@@ -125,7 +125,7 @@ begin
   socket.connect(UDP_HOST, UDP_PORT)
 
   while raw = $stdin.gets
-    <%= @match_regex %> =~ raw
+    <%= @match_regex %> =~ raw.encode(Encoding.find('UTF-8'), {invalid: :replace, undef: :replace, replace: ''})
 
     if <%= @validate_expression %>
       logger.warn("Failed to parse line: '#{raw}'")
